@@ -1,36 +1,262 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📘 Documentação – Estrutura do Projeto Hub de Eventos de Vaquejada
 
-## Getting Started
+Este documento descreve **toda a estrutura técnica e arquitetural** utilizada no projeto **Hub de Eventos de Vaquejada**, explicando decisões, padrões e como cada parte se conecta. Ele serve como **documentação oficial do repositório**.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🎯 Objetivo do Projeto
+
+Criar um **hub de eventos de vaquejada** com foco em:
+
+- Hospedagem gratuita (Vercel)
+- Performance (SSG / App Router)
+- UX real de vaquejada
+- Escalabilidade para múltiplos eventos
+- Fluxo real de conversão (WhatsApp)
+
+---
+
+## 🧱 Stack Utilizada
+
+- **Next.js** (App Router)
+- **TypeScript**
+- **Tailwind CSS**
+- **Vercel** (deploy)
+
+---
+
+## 📁 Estrutura de Pastas
+
+```
+app/
+└─ eventos/
+   └─ [slug]/
+      └─ page.tsx        # Página de detalhes do evento (Server Component)
+
+components/
+└─ ComprarSenhaCTA.tsx  # CTA reutilizável (Client Component)
+
+data/
+└─ eventos.ts           # Base de dados estática dos eventos
+
+public/
+└─ eventos/
+   └─ tropa-de-elite.jpg
+   └─ outro-evento.jpg
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🧠 Arquitetura Geral
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Separação de responsabilidades
 
-## Learn More
+| Camada | Responsabilidade |
+|------|------------------|
+| `page.tsx` | Renderização do evento, SEO, layout (Server Component) |
+| `ComprarSenhaCTA` | Interação do usuário, estado, WhatsApp (Client Component) |
+| `eventos.ts` | Fonte de dados desacoplada da UI |
 
-To learn more about Next.js, take a look at the following resources:
+Essa separação segue **o padrão oficial do Next.js App Router**.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🧩 Página de Evento – `page.tsx`
 
-## Deploy on Vercel
+### Tipo
+- **Server Component** (não usa `use client`)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Responsabilidades
+- Resolver `params.slug` com `await`
+- Buscar evento correto
+- Renderizar:
+  - Hero
+  - Premiação
+  - CTA
+  - Cards
+  - Sobre
+  - Local
+  - Contato
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Por que Server Component?
+
+- Melhor SEO
+- Melhor performance
+- Compatível com SSG
+- Menor JS no cliente
+
+---
+
+## 🔁 Roteamento por Slug
+
+Cada evento é acessado por:
+
+```
+/eventos/[slug]
+```
+
+Exemplo:
+```
+/eventos/tropa-de-elite
+```
+
+O `slug`:
+- É único
+- Define a URL
+- Define a imagem
+
+---
+
+## 🖼️ Padrão de Imagens
+
+As imagens seguem **convenção por slug**:
+
+```
+slug: tropa-de-elite
+imagem: /public/eventos/tropa-de-elite.jpg
+```
+
+Benefícios:
+- Zero lógica condicional
+- Fácil manutenção
+- Ideal para Vercel
+
+---
+
+## 📦 Dados dos Eventos – `data/eventos.ts`
+
+Os eventos são definidos como objetos TypeScript.
+
+### Exemplo de estrutura:
+
+```ts
+{
+  slug: "tropa-de-elite",
+  title: "Tropa de Elite",
+  date: "14 de fevereiro",
+  location: "Bonfinópolis - GO",
+  parkName: "Parque de Vaquejada XYZ",
+  prizeMoney: 3000,
+  hasTrophy: true,
+  totalTickets: 60,
+  ticketPrice: 200,
+  ticketLimitPerRider: 2,
+  hasBar: true,
+  description: "Evento tradicional de vaquejada...",
+  organizersContacts: ["62999999999"]
+}
+```
+
+---
+
+## 🎟️ CTA – Comprar Senha (WhatsApp)
+
+### Arquivo
+```
+components/ComprarSenhaCTA.tsx
+```
+
+### Tipo
+- **Client Component** (`"use client"`)
+
+### Responsabilidades
+
+- Controlar estado (`useState`)
+- Seleção da quantidade de senhas
+- Gerar mensagem automática
+- Criar link do WhatsApp
+- Controlar CTA fixo no mobile
+
+---
+
+## 📲 Mensagem Automática
+
+Mensagem enviada ao WhatsApp:
+
+```
+Olá! Tenho interesse em comprar senha para o evento "Tropa de Elite".
+
+📅 Data: 14 de fevereiro
+📍 Local: Bonfinópolis - GO
+🎟️ Quantidade de senhas: 2
+
+Pode me passar mais informações, por favor?
+```
+
+A mensagem é gerada dinamicamente com `encodeURIComponent`.
+
+---
+
+## 📱 CTA Mobile Inteligente
+
+### Comportamento
+
+- Mobile: CTA fixo no rodapé
+- Desktop: CTA apenas no Hero
+- CTA mobile **desaparece ao chegar no rodapé**
+
+### Técnica utilizada
+
+- `IntersectionObserver`
+- Observação do elemento `<footer>`
+
+Isso evita sobreposição e melhora UX.
+
+---
+
+## 🎨 Identidade Visual
+
+### Conceito
+
+**Couro • Terra • Sertão**
+
+### Paleta base
+
+- Fundo: `amber-950`
+- Cards: `amber-900 / amber-950`
+- Destaques: `amber-500 / amber-600`
+- Texto: `amber-100 / amber-200`
+
+Nada de cores frias.
+Nada de preto puro dominante.
+
+---
+
+## 🚀 Escalabilidade
+
+Esse modelo suporta:
+
+- Múltiplos eventos
+- Listagem futura (`/eventos`)
+- Integração com API
+- CMS
+- Pagamento online
+- App mobile
+
+Sem refatoração estrutural.
+
+---
+
+## ✅ Pronto para Produção
+
+Checklist final:
+
+- [x] App Router
+- [x] Server + Client Components
+- [x] SEO-friendly
+- [x] UX real
+- [x] CTA funcional
+- [x] WhatsApp integrado
+- [x] Deploy Vercel
+
+---
+
+## 🏁 Conclusão
+
+Este projeto não é apenas um site, mas uma **base sólida de produto**, pensada para a realidade da vaquejada, com foco em conversão, organização e crescimento.
+
+---
+
+📌 **Autor:** Projeto Hub de Eventos de Vaquejada
+📌 **Status:** Pronto para produção
+
