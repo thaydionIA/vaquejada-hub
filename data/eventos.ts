@@ -15,7 +15,7 @@ export const eventos: Event[] = [
 
     totalTickets: 60,
     ticketPrice: 200,
-    ticketLimitPerRider: 2,
+    ticketLimitPerRider: 3,
 
     hasBar: true,
 

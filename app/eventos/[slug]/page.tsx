@@ -12,6 +12,22 @@ export default async function EventPage({ params }: EventPageProps) {
 
   if (!evento) notFound();
 
+  /* ================= WHATSAPP CTA ================= */
+  const whatsappNumber = evento.organizersContacts[0];
+
+  const whatsappMessage = encodeURIComponent(
+    `Olá! Tenho interesse em comprar senha para o evento "${evento.title}".\n\n` +
+    `📅 Data: ${evento.date}\n` +
+    `📍 Local: ${evento.location}\n` +
+    `🎟️ Quantidade de senhas: 1\n\n` +
+    `Pode me passar mais informações, por favor?`
+  );
+
+  const whatsappLink = `https://wa.me/55${whatsappNumber.replace(
+    /\D/g,
+    ""
+  )}?text=${whatsappMessage}`;
+
   return (
     <main className="bg-amber-950 text-amber-50">
 
@@ -41,11 +57,21 @@ export default async function EventPage({ params }: EventPageProps) {
             {evento.date} • {evento.location}
           </p>
 
-          {/* Premiação (agora fica totalmente livre) */}
+          {/* Premiação */}
           <p className="mt-6 text-3xl font-bold text-amber-500">
             R$ {evento.prizeMoney.toLocaleString("pt-BR")}
             {evento.hasTrophy && " + Troféu"}
           </p>
+
+          {/* ================= CTA PRINCIPAL ================= */}
+          <a
+            href={whatsappLink}
+            target="_blank"
+            className="mt-8 inline-flex w-fit items-center gap-3 rounded-xl bg-amber-600 px-10 py-4 text-xl font-extrabold text-black shadow-lg shadow-amber-600/40 transition hover:bg-amber-700"
+          >
+            Comprar minha senha
+            <span className="text-2xl">📲</span>
+          </a>
         </div>
       </section>
 
@@ -54,7 +80,7 @@ export default async function EventPage({ params }: EventPageProps) {
         <div className="grid gap-6 rounded-2xl bg-amber-900/80 p-8 shadow-xl sm:grid-cols-2 lg:grid-cols-5">
           <InfoCard label="Senhas">{evento.totalTickets}</InfoCard>
           <InfoCard label="Valor">R$ {evento.ticketPrice}</InfoCard>
-          <InfoCard label="Limite">{evento.ticketLimitPerRider}</InfoCard>
+          <InfoCard label="Limite por Participante">{evento.ticketLimitPerRider}</InfoCard>
           <InfoCard label="Troféu">{evento.hasTrophy ? "Sim" : "Não"}</InfoCard>
           <InfoCard label="Bar">{evento.hasBar ? "Sim" : "Não"}</InfoCard>
         </div>
