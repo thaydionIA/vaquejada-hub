@@ -23,4 +23,5 @@ export interface Event {
   organizersContacts: string[];
 
   status: EventStatus;
+  image: string;
 }

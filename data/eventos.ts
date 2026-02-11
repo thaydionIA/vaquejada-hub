@@ -25,5 +25,6 @@ export const eventos: Event[] = [
     organizersContacts: ["6299202-4591", "6299494-5226"],
 
     status: "upcoming",
+    image: "/eventos/tropa.jpg"
   },
 ];
