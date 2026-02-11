@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-
-type EventStatus = "ongoing" | "upcoming";
+import { EventStatus } from "@/types/Event";
 
 interface EventCardProps {
   title: string;
@@ -20,21 +19,29 @@ export function EventCard({
   slug,
   image,
 }: EventCardProps) {
-  const statusConfig = {
+  const statusConfig: Record<
+    EventStatus,
+    { label: string; className: string }
+  > = {
     ongoing: {
-      label: "Acontecendo agora",
-      className: "bg-[#C66A1E] text-white",
+      label: "🔴 Acontecendo agora",
+      className: "bg-red-600 text-white animate-pulse",
     },
     upcoming: {
-      label: "Em breve",
-      className: "bg-[#4E342E] text-[#EBD5B3]",
+      label: "🟡 Em breve",
+      className: "bg-[#C66A1E] text-white",
+    },
+    finished: {
+      label: "🟢 Encerrada",
+      className: "bg-green-700 text-white",
     },
   };
 
   return (
     <div className="group w-full max-w-md mx-auto transition duration-300 hover:scale-105">
-      <div className="borda-moldura rounded-xl bg-[#2A1A12] shadow-[0_15px_40px_rgba(0,0,0,0.7)] overflow-hidden">
-        {/* IMAGEM */}
+      <div className="borda-moldura rounded-xl bg-[#2A1A12] shadow-[0_15px_40px_rgba(0,0,0,0.7)] overflow-hidden border border-[#5A3A22]">
+
+        {/* ================= IMAGEM ================= */}
         <div className="relative h-56 w-full">
           <Image
             src={image}
@@ -42,6 +49,7 @@ export function EventCard({
             fill
             className="object-cover transition duration-500 group-hover:scale-110"
           />
+
           <div className="absolute inset-0 bg-black/40" />
 
           <span
@@ -51,7 +59,7 @@ export function EventCard({
           </span>
         </div>
 
-        {/* CONTEÚDO */}
+        {/* ================= CONTEÚDO ================= */}
         <div className="p-6 text-[#F5E6D3] bg-gradient-to-b from-[#3B2A1F] to-[#2A1A12]">
           <h3 className="mb-3 text-2xl font-semibold">{title}</h3>
 
@@ -62,30 +70,34 @@ export function EventCard({
           <Link
             href={`/eventos/${slug}`}
             className="
-    relative
-    inline-block
-    px-6
-    py-2
-    text-sm
-    font-bold
-    text-[#F5E6D3]
-    rounded-md
-    transition
-    duration-300
-    hover:scale-105
-    active:scale-95
-  "
+              relative
+              inline-block
+              px-6
+              py-2
+              text-sm
+              font-bold
+              text-[#F5E6D3]
+              rounded-md
+              transition
+              duration-300
+              hover:scale-105
+              active:scale-95
+            "
           >
             <span
               className="
-      absolute inset-0 rounded-md
-      bg-[url('/btn3.png')]
-      bg-cover bg-center
-      border border-[#5A3A22]
-      shadow-[inset_0_3px_6px_rgba(255,255,255,0.15),inset_0_-4px_8px_rgba(0,0,0,0.6),0_6px_12px_rgba(0,0,0,0.6)]
-    "
+                absolute inset-0 rounded-md
+                bg-[url('/btn3.png')]
+                bg-cover bg-center
+                border border-[#5A3A22]
+                shadow-[inset_0_3px_6px_rgba(255,255,255,0.15),inset_0_-4px_8px_rgba(0,0,0,0.6),0_6px_12px_rgba(0,0,0,0.6)]
+              "
             />
-            <span className="relative z-10">Ver detalhes →</span>
+            <span className="relative z-10">
+              {status === "finished"
+                ? "Ver Resultados →"
+                : "Ver detalhes →"}
+            </span>
           </Link>
         </div>
       </div>

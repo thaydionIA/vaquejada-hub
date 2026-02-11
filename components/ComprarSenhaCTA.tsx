@@ -8,6 +8,7 @@ interface ComprarSenhaCTAProps {
     date: string;
     location: string;
     ticketLimitPerRider: number;
+    ticketPrice?: number; // opcional para calcular total
     whatsapp: string;
     slug: string;
   };
@@ -21,7 +22,6 @@ export function ComprarSenhaCTA({ evento }: ComprarSenhaCTAProps) {
 
   useEffect(() => {
     footerRef.current = document.querySelector("footer");
-
     if (!footerRef.current) return;
 
     const observer = new IntersectionObserver(
@@ -32,15 +32,22 @@ export function ComprarSenhaCTA({ evento }: ComprarSenhaCTAProps) {
     );
 
     observer.observe(footerRef.current);
-
     return () => observer.disconnect();
   }, []);
+
+  const valorTotal =
+    evento.ticketPrice && quantidade
+      ? evento.ticketPrice * quantidade
+      : null;
 
   const message = encodeURIComponent(
     `Olá! Tenho interesse em comprar senha para o evento "${evento.title}".\n\n` +
       `📅 Data: ${evento.date}\n` +
       `📍 Local: ${evento.location}\n` +
-      `🎟️ Quantidade de senhas: ${quantidade}\n\n` +
+      `🎟️ Quantidade de senhas: ${quantidade}\n` +
+      (valorTotal
+        ? `💰 Valor total: R$ ${valorTotal.toLocaleString("pt-BR")}\n\n`
+        : "\n") +
       `Pode me passar mais informações, por favor?`
   );
 
@@ -51,8 +58,8 @@ export function ComprarSenhaCTA({ evento }: ComprarSenhaCTAProps) {
 
   return (
     <>
-      {/* Quantidade */}
-      <div className="mt-6 flex items-center gap-4">
+      {/* ================= QUANTIDADE ================= */}
+      <div className="mt-6 flex flex-col gap-3 md:flex-row md:items-center md:gap-6">
         <label className="font-semibold text-amber-200">
           Quantidade de senhas:
         </label>
@@ -60,7 +67,7 @@ export function ComprarSenhaCTA({ evento }: ComprarSenhaCTAProps) {
         <select
           value={quantidade}
           onChange={(e) => setQuantidade(Number(e.target.value))}
-          className="rounded-lg bg-amber-900 px-4 py-2 text-amber-100 border border-amber-700"
+          className="rounded-lg bg-amber-900 px-4 py-2 text-amber-100 border border-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500"
         >
           {Array.from(
             { length: evento.ticketLimitPerRider },
@@ -71,24 +78,32 @@ export function ComprarSenhaCTA({ evento }: ComprarSenhaCTAProps) {
             </option>
           ))}
         </select>
+
+        {valorTotal && (
+          <span className="text-amber-400 font-bold text-lg">
+            Total: R$ {valorTotal.toLocaleString("pt-BR")}
+          </span>
+        )}
       </div>
 
-      {/* CTA DESKTOP */}
+      {/* ================= CTA DESKTOP ================= */}
       <a
         href={whatsappLink}
         target="_blank"
-        className="mt-8 hidden md:inline-flex w-fit items-center gap-3 rounded-xl bg-amber-600 px-10 py-4 text-xl font-extrabold text-black shadow-lg shadow-amber-600/40 transition hover:bg-amber-700"
+        rel="noopener noreferrer"
+        className="mt-8 hidden md:inline-flex w-fit items-center gap-3 rounded-xl bg-amber-600 px-10 py-4 text-xl font-extrabold text-black shadow-lg shadow-amber-600/40 transition hover:bg-amber-700 hover:scale-[1.02]"
       >
         Comprar minha senha
         <span className="text-2xl">📲</span>
       </a>
 
-      {/* CTA MOBILE FIXO (condicional) */}
+      {/* ================= CTA MOBILE FIXO ================= */}
       {showMobileCTA && (
         <a
           href={whatsappLink}
           target="_blank"
-          className="fixed bottom-4 left-4 right-4 z-50 flex items-center justify-center gap-3 rounded-xl bg-amber-600 py-4 text-lg font-extrabold text-black shadow-lg shadow-amber-600/40 md:hidden transition-opacity"
+          rel="noopener noreferrer"
+          className="fixed bottom-4 left-4 right-4 z-50 flex items-center justify-center gap-3 rounded-xl bg-amber-600 py-4 text-lg font-extrabold text-black shadow-lg shadow-amber-600/40 md:hidden transition-transform active:scale-95"
         >
           Comprar minha senha
           <span className="text-2xl">📲</span>

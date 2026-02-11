@@ -17,6 +17,14 @@ export const eventos: Event[] = [
     ticketPrice: 200,
     ticketLimitPerRider: 3,
 
+    ticketsSold: 60, // 👈 SE FOR IGUAL totalTickets = ESGOTADO
+
+    participants: [
+      { nome: "João Silva", cavalo: "Relâmpago" },
+      { nome: "Carlos Mendes", cavalo: "Furacão" },
+      { nome: "Pedro Alves", cavalo: "Trovão" },
+    ],
+
     hasBar: true,
 
     parkName: "Parque Raíz do Sertão",
@@ -25,6 +33,7 @@ export const eventos: Event[] = [
     organizersContacts: ["6299202-4591", "6299494-5226"],
 
     status: "upcoming",
-    image: "/eventos/tropa.jpg"
+
+    image: "/home3.png",
   },
 ];

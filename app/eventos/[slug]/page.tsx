@@ -2,16 +2,31 @@ import { eventos } from "@/data/eventos";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { ComprarSenhaCTA } from "@/components/ComprarSenhaCTA";
+import Link from "next/link";
+
+export const dynamic = "force-static";
+
+export function generateStaticParams() {
+  return eventos.map((evento) => ({
+    slug: evento.slug,
+  }));
+}
 
 interface EventPageProps {
   params: Promise<{ slug: string }>;
 }
 
 export default async function EventPage({ params }: EventPageProps) {
-  const { slug } = await params;
+  const { slug } = await params; // ✅ NECESSÁRIO NO NEXT 15
 
   const evento = eventos.find((e) => e.slug === slug);
   if (!evento) notFound();
+
+  const ticketsSold = evento.ticketsSold ?? 0;
+  const restantes = evento.totalTickets - ticketsSold;
+  const esgotado = restantes <= 0;
+  const ultimasUnidades = restantes > 0 && restantes <= 5;
+
 
   return (
     <main className="bg-amber-950 text-amber-50">
@@ -19,7 +34,7 @@ export default async function EventPage({ params }: EventPageProps) {
       {/* ================= HERO ================= */}
       <section className="relative h-[85vh] w-full">
         <Image
-          src={`/eventos/${evento.slug}.jpg`}
+          src={evento.image}
           alt={evento.title}
           fill
           priority
@@ -46,28 +61,64 @@ export default async function EventPage({ params }: EventPageProps) {
             {evento.hasTrophy && " + Troféu"}
           </p>
 
+          {/* STATUS DE VENDAS */}
+          <div className="mt-6">
+            {esgotado && (
+              <div className="rounded-xl bg-red-800 px-6 py-3 text-lg font-bold text-white shadow-lg">
+                🚫 SENHAS ESGOTADAS
+              </div>
+            )}
+
+            {!esgotado && (
+              <>
+                <p className="text-amber-200 text-lg">
+                  🎟️ Restam <strong>{restantes}</strong> senhas
+                </p>
+
+                {ultimasUnidades && (
+                  <span className="mt-2 inline-block rounded-full bg-red-600 px-4 py-1 text-sm font-bold text-white animate-pulse">
+                    🔥 ÚLTIMAS UNIDADES
+                  </span>
+                )}
+              </>
+            )}
+          </div>
+
           {/* CTA */}
-          <ComprarSenhaCTA
-            evento={{
-              title: evento.title,
-              date: evento.date,
-              location: evento.location,
-              ticketLimitPerRider: evento.ticketLimitPerRider,
-              whatsapp: evento.organizersContacts[0],
-              slug: evento.slug,
-            }}
-          />
+          {!esgotado && (
+            <ComprarSenhaCTA
+              evento={{
+                title: evento.title,
+                date: evento.date,
+                location: evento.location,
+                ticketLimitPerRider: evento.ticketLimitPerRider,
+                whatsapp: evento.organizersContacts[0],
+                slug: evento.slug,
+              }}
+            />
+          )}
+
+          {/* BOTÃO PARTICIPANTES */}
+          <div className="mt-6 flex gap-4 flex-wrap">
+            <Link
+              href={`/eventos/${evento.slug}/participantes`}
+              className="rounded-xl border border-amber-500 px-6 py-3 text-lg font-semibold text-amber-400 transition hover:bg-amber-600 hover:text-black"
+            >
+              🐂 Ver Participantes
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* ================= CARDS ================= */}
       <section className="mx-auto max-w-6xl px-6 mt-16">
-        <div className="grid gap-6 rounded-2xl bg-amber-900/80 p-8 shadow-xl sm:grid-cols-2 lg:grid-cols-5">
-          <InfoCard label="Senhas">{evento.totalTickets}</InfoCard>
+        <div className="grid gap-6 rounded-2xl bg-amber-900/80 p-8 shadow-xl sm:grid-cols-2 lg:grid-cols-6">
+          <InfoCard label="Total de Senhas">{evento.totalTickets}</InfoCard>
+          <InfoCard label="Vendidas">{ticketsSold}</InfoCard>
+          <InfoCard label="Restantes">{restantes < 0 ? 0 : restantes}</InfoCard>
           <InfoCard label="Valor">R$ {evento.ticketPrice}</InfoCard>
           <InfoCard label="Limite por Participante">{evento.ticketLimitPerRider}</InfoCard>
           <InfoCard label="Troféu">{evento.hasTrophy ? "Sim" : "Não"}</InfoCard>
-          <InfoCard label="Bar">{evento.hasBar ? "Sim" : "Não"}</InfoCard>
         </div>
       </section>
 
@@ -97,7 +148,6 @@ export default async function EventPage({ params }: EventPageProps) {
 
       {/* ================= CONTATO ================= */}
       <footer className="bg-amber-900 py-20">
-
         <div className="mx-auto max-w-4xl px-6">
           <h2 className="mb-8 text-3xl font-bold text-amber-400">
             Contato dos organizadores
@@ -116,8 +166,7 @@ export default async function EventPage({ params }: EventPageProps) {
             ))}
           </div>
         </div>
-        </footer>
-
+      </footer>
     </main>
   );
 }

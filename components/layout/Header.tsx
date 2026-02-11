@@ -1,8 +1,9 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 relative overflow-hidden">
+    <header className="relative overflow-hidden">
 
       {/* Fundo textura */}
       <div
@@ -12,25 +13,22 @@ export function Header() {
         }}
       />
 
-      {/* Overlay para escurecer e dar contraste */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/60" />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/80 to-black/70 backdrop-blur-sm" />
 
       {/* Conteúdo */}
       <div className="relative z-10 mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
 
         {/* Logo */}
-        <Link
-          href="/"
-          className="
-            text-2xl
-            font-bold
-            tracking-wider
-            text-[#EBD5B3]
-            hover:text-[#E89A3D]
-            transition
-          "
-        >
-          HUB VAQUEJADA
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logo.png"
+            alt="Hub de Vaquejada"
+            width={220}
+            height={120}
+            priority
+            className="h-auto w-auto max-h-16 object-contain"
+          />
         </Link>
 
         {/* Navegação */}
@@ -38,11 +36,13 @@ export function Header() {
           <Link href="/" className="hover:text-[#E89A3D] transition">
             Início
           </Link>
-          <Link href="/eventos" className="hover:text-[#E89A3D] transition">
-            Eventos
+
+          <Link href="/eventos/encerradas" className="hover:text-[#E89A3D] transition">
+            Festas
           </Link>
+
           <Link href="/sobre" className="hover:text-[#E89A3D] transition">
-            Sobre
+            Plataforma
           </Link>
         </nav>
 
