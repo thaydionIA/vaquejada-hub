@@ -1,6 +1,7 @@
 import { eventos } from "@/data/eventos";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import { ComprarSenhaCTA } from "@/components/ComprarSenhaCTA";
 
 interface EventPageProps {
   params: Promise<{ slug: string }>;
@@ -8,25 +9,9 @@ interface EventPageProps {
 
 export default async function EventPage({ params }: EventPageProps) {
   const { slug } = await params;
+
   const evento = eventos.find((e) => e.slug === slug);
-
   if (!evento) notFound();
-
-  /* ================= WHATSAPP CTA ================= */
-  const whatsappNumber = evento.organizersContacts[0];
-
-  const whatsappMessage = encodeURIComponent(
-    `Olá! Tenho interesse em comprar senha para o evento "${evento.title}".\n\n` +
-    `📅 Data: ${evento.date}\n` +
-    `📍 Local: ${evento.location}\n` +
-    `🎟️ Quantidade de senhas: 1\n\n` +
-    `Pode me passar mais informações, por favor?`
-  );
-
-  const whatsappLink = `https://wa.me/55${whatsappNumber.replace(
-    /\D/g,
-    ""
-  )}?text=${whatsappMessage}`;
 
   return (
     <main className="bg-amber-950 text-amber-50">
@@ -41,7 +26,6 @@ export default async function EventPage({ params }: EventPageProps) {
           className="object-cover"
         />
 
-        {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-amber-950 via-black/80 to-amber-900/40" />
 
         <div className="relative z-10 mx-auto flex h-full max-w-6xl flex-col justify-end px-6 pb-24">
@@ -57,30 +41,31 @@ export default async function EventPage({ params }: EventPageProps) {
             {evento.date} • {evento.location}
           </p>
 
-          {/* Premiação */}
           <p className="mt-6 text-3xl font-bold text-amber-500">
             R$ {evento.prizeMoney.toLocaleString("pt-BR")}
             {evento.hasTrophy && " + Troféu"}
           </p>
 
-          {/* ================= CTA PRINCIPAL ================= */}
-          <a
-            href={whatsappLink}
-            target="_blank"
-            className="mt-8 inline-flex w-fit items-center gap-3 rounded-xl bg-amber-600 px-10 py-4 text-xl font-extrabold text-black shadow-lg shadow-amber-600/40 transition hover:bg-amber-700"
-          >
-            Comprar minha senha
-            <span className="text-2xl">📲</span>
-          </a>
+          {/* CTA */}
+          <ComprarSenhaCTA
+            evento={{
+              title: evento.title,
+              date: evento.date,
+              location: evento.location,
+              ticketLimitPerRider: evento.ticketLimitPerRider,
+              whatsapp: evento.organizersContacts[0],
+              slug: evento.slug,
+            }}
+          />
         </div>
       </section>
 
-      {/* ================= CARDS DE INFO ================= */}
+      {/* ================= CARDS ================= */}
       <section className="mx-auto max-w-6xl px-6 mt-16">
         <div className="grid gap-6 rounded-2xl bg-amber-900/80 p-8 shadow-xl sm:grid-cols-2 lg:grid-cols-5">
           <InfoCard label="Senhas">{evento.totalTickets}</InfoCard>
           <InfoCard label="Valor">R$ {evento.ticketPrice}</InfoCard>
-          <InfoCard label="Limite por Participante">{evento.ticketLimitPerRider}</InfoCard>
+          <InfoCard label="Limite">{evento.ticketLimitPerRider}</InfoCard>
           <InfoCard label="Troféu">{evento.hasTrophy ? "Sim" : "Não"}</InfoCard>
           <InfoCard label="Bar">{evento.hasBar ? "Sim" : "Não"}</InfoCard>
         </div>
@@ -111,7 +96,8 @@ export default async function EventPage({ params }: EventPageProps) {
       </section>
 
       {/* ================= CONTATO ================= */}
-      <section className="bg-amber-900 py-20">
+      <footer className="bg-amber-900 py-20">
+
         <div className="mx-auto max-w-4xl px-6">
           <h2 className="mb-8 text-3xl font-bold text-amber-400">
             Contato dos organizadores
@@ -130,7 +116,7 @@ export default async function EventPage({ params }: EventPageProps) {
             ))}
           </div>
         </div>
-      </section>
+        </footer>
 
     </main>
   );
