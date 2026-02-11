@@ -65,7 +65,7 @@ export default async function EventPage({ params }: EventPageProps) {
         <div className="grid gap-6 rounded-2xl bg-amber-900/80 p-8 shadow-xl sm:grid-cols-2 lg:grid-cols-5">
           <InfoCard label="Senhas">{evento.totalTickets}</InfoCard>
           <InfoCard label="Valor">R$ {evento.ticketPrice}</InfoCard>
-          <InfoCard label="Limite">{evento.ticketLimitPerRider}</InfoCard>
+          <InfoCard label="Limite por Participante">{evento.ticketLimitPerRider}</InfoCard>
           <InfoCard label="Troféu">{evento.hasTrophy ? "Sim" : "Não"}</InfoCard>
           <InfoCard label="Bar">{evento.hasBar ? "Sim" : "Não"}</InfoCard>
         </div>
