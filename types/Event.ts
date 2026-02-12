@@ -24,7 +24,7 @@ export interface Event {
   participants?: Participant[];
   
   hasBar: boolean;
-
+  faixa: number;
   parkName: string;
   location: string;
 

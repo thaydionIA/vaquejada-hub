@@ -26,6 +26,7 @@ export const eventos: Event[] = [
     ],
 
     hasBar: true,
+    faixa: 7,
 
     parkName: "Parque Raíz do Sertão",
     location: "Bonfinópolis - GO",
