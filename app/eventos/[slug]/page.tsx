@@ -48,7 +48,7 @@ export default async function EventPage({ params }: EventPageProps) {
             Evento de Vaquejada
           </span>
 
-          <h1 className="text-5xl font-extrabold tracking-tight md:text-6xl">
+          <h1 className="text-3xl font-extrabold tracking-tight md:text-5xl">
             {evento.title}
           </h1>
 

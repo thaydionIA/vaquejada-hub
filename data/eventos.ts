@@ -3,21 +3,21 @@ import { Event } from "@/types/Event";
 export const eventos: Event[] = [
   {
     id: "1",
-    title: "Tropa de Elite",
-    slug: "tropa-de-elite",
+    title: "Bolão de Vaquejada Rancho Pai e Filho",
+    slug: "rancho-pai-filho",
     description:
       "Evento de vaquejada com grandes competidores, premiação garantida e estrutura completa para vaqueiros e público.",
 
-    date: "14 de fevereiro",
+    date: "02 de Maio",
 
-    prizeMoney: 3000,
-    hasTrophy: true,
+    prizeMoney: 1000,
+    hasTrophy: false,
 
-    totalTickets: 60,
-    ticketPrice: 200,
+    totalTickets: 30,
+    ticketPrice: 150,
     ticketLimitPerRider: 3,
 
-    ticketsSold: 60, // 👈 SE FOR IGUAL totalTickets = ESGOTADO
+    ticketsSold: 0, // 👈 SE FOR IGUAL totalTickets = ESGOTADO
 
     participants: [
       { nome: "João Silva", cavalo: "Relâmpago" },
@@ -25,16 +25,16 @@ export const eventos: Event[] = [
       { nome: "Pedro Alves", cavalo: "Trovão" },
     ],
 
-    hasBar: true,
+    hasBar: false,
     faixa: 7,
 
-    parkName: "Parque Raíz do Sertão",
-    location: "Bonfinópolis - GO",
+    parkName: "Rancho Pai e Filho",
+    location: "Senador Canedo - GO",
 
-    organizersContacts: ["6299202-4591", "6299494-5226"],
+    organizersContacts: ["62 9334-8760", "00000000000"],
 
     status: "upcoming",
 
-    image: "/home3.png",
+    image: "/home5.png",
   },
 ];
