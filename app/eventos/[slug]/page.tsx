@@ -67,7 +67,7 @@ export default async function EventPage({ params }: EventPageProps) {
             </p>
 
             <p className="text-amber-300">
-              {evento.location}
+             📍 {evento.location}
             </p>
 
             <p className="text-1xl font-bold text-amber-500 mt-4">
