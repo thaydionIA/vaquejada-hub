@@ -4,7 +4,7 @@ export const eventos: Event[] = [
   {
     id: "1",
     title: "Bolão de Vaquejada Rancho Pai e Filho",
-    slug: "rancho-pai-filho",
+    slug: "rancho-pai-filho", 
     description:
       "Evento de vaquejada com grandes competidores, premiação garantida e estrutura completa para vaqueiros e público.",
 

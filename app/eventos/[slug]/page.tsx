@@ -31,7 +31,8 @@ export default async function EventPage({ params }: EventPageProps) {
     <main className="bg-amber-950 text-amber-50">
 
       {/* ================= HERO ================= */}
-      <section className="relative h-[85vh] w-full">
+      <section className="relative min-h-[100svh] w-full">
+
         <Image
           src={evento.image}
           alt={evento.title}
@@ -42,35 +43,36 @@ export default async function EventPage({ params }: EventPageProps) {
 
         <div className="absolute inset-0 bg-gradient-to-t from-amber-950 via-black/80 to-amber-900/40" />
 
-        <div className="relative z-10 mx-auto flex h-full max-w-6xl flex-col justify-end px-6 pb-24">
+        <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-end px-6 pb-16 md:pb-24">
 
           <span className="mb-4 w-fit rounded-full bg-amber-900 px-4 py-1 text-sm font-bold text-amber-100">
-            Evento de Vaquejada
+            Festa de Vaquejada
           </span>
 
-          <h1 className="text-3xl font-extrabold tracking-tight md:text-5xl">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight max-w-3xl">
             {evento.title}
           </h1>
 
-          {/* INFORMAÇÕES DESTACADAS */}
           <div className="mt-6 space-y-2">
-
-            <p className="text-xl text-amber-200">
+            <p className="text-lg text-amber-200">
               📅 {evento.date}
             </p>
 
-            <p className="text-2xl font-semibold text-amber-100 drop-shadow-md">
+            <p className="text-xl font-semibold text-amber-100">
               🏟️ {evento.parkName}
             </p>
 
-            <p className="text-lg text-amber-300">
+            <p className="text-amber-300">
+              📏 Faixa Oficial: <strong>{evento.faixa} metros</strong>
+            </p>
+
+            <p className="text-amber-300">
               {evento.location}
             </p>
 
-            <p className="text-lg text-amber-300">
-              📏 Faixa: <strong>{evento.faixa} metros</strong>
+            <p className="text-1xl font-bold text-amber-500 mt-4">
+               💵 Valor Senha: <strong>{evento.ticketPrice} R$</strong>
             </p>
-
           </div>
 
           <p className="mt-6 text-3xl font-bold text-amber-500">
