@@ -1,0 +1,18 @@
+participantes:   {
+    eventoSlug: "tropa-de-elite",
+    nome: "",
+    //cavalo: "",
+    boisDerrubados: 0,
+    totalBois: 1,
+    status: "-",
+    //posicao: 1,
+  },
+
+  {
+    eventoSlug: "tropa-de-elite",
+    nome: "",,
+    boisDerrubados: 0,
+    totalBois: 1,
+    status: "-",
+  
+  },

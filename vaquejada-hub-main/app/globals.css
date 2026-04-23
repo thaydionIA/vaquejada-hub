@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  min-height: 100%;
+}
+
+.borda-moldura {
+  border: 20px solid transparent;
+  border-image-source: url('/moldura.png');
+  border-image-slice: 40;
+  border-image-repeat: round;
+}
