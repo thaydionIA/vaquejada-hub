@@ -125,7 +125,7 @@ export const participantes: Participante[] = [
   },
   {
     eventoSlug: "rancho-pai-filho", //#15
-    nome: "-",
+    nome: "Lucas",
     cavalo: "-",
     boisDerrubados: 0,
     totalBois: 1,
@@ -173,7 +173,7 @@ export const participantes: Participante[] = [
   },
   {
     eventoSlug: "rancho-pai-filho", //#21
-    nome: "-",
+    nome: "Lucas",
     cavalo: "-",
     boisDerrubados: 0,
     totalBois: 1,
