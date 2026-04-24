@@ -37,7 +37,7 @@ export const participantes: Participante[] = [
   },
   {
     eventoSlug: "rancho-pai-filho", //#04
-    nome: "Galego",
+    nome: "Galego de Goiâna",
     cavalo: "-",
     boisDerrubados: 0,
     totalBois: 1,
@@ -45,7 +45,7 @@ export const participantes: Participante[] = [
   },
   {
     eventoSlug: "rancho-pai-filho", //#05
-    nome: "-",
+    nome: "Ricardo",
     cavalo: "-",
     boisDerrubados: 0,
     totalBois: 1,
@@ -69,7 +69,7 @@ export const participantes: Participante[] = [
   },
   {
     eventoSlug: "rancho-pai-filho", //#08
-    nome: "Galego",
+    nome: "Galego de Goiâna",
     cavalo: "-",
     boisDerrubados: 0,
     totalBois: 1,
@@ -77,7 +77,7 @@ export const participantes: Participante[] = [
   },
   {
     eventoSlug: "rancho-pai-filho", //#09
-    nome: "-",
+    nome: "Ricardo",
     cavalo: "-",
     boisDerrubados: 0,
     totalBois: 1,
@@ -189,7 +189,7 @@ export const participantes: Participante[] = [
   },
   {
     eventoSlug: "rancho-pai-filho", //#23
-    nome: "Ricardo",
+    nome: "-",
     cavalo: "-",
     boisDerrubados: 0,
     totalBois: 1,
@@ -245,7 +245,7 @@ export const participantes: Participante[] = [
   },
   {
     eventoSlug: "rancho-pai-filho", //#30
-    nome: "Ricardo",
+    nome: "-",
     cavalo: "-",
     boisDerrubados: 0,
     totalBois: 1,
