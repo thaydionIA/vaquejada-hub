@@ -37,7 +37,7 @@ export const participantes: Participante[] = [
   },
   {
     eventoSlug: "rancho-pai-filho", //#04
-    nome: "Galego de Goiâna",
+    nome: "Galego de Goiânia",
     cavalo: "-",
     boisDerrubados: 0,
     totalBois: 1,
@@ -69,7 +69,7 @@ export const participantes: Participante[] = [
   },
   {
     eventoSlug: "rancho-pai-filho", //#08
-    nome: "Galego de Goiâna",
+    nome: "Galego de Goiânia",
     cavalo: "-",
     boisDerrubados: 0,
     totalBois: 1,
