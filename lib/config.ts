@@ -1,2 +1,2 @@
-export const PLATFORM_WHATSAPP = "5562999999999"; 
+export const PLATFORM_WHATSAPP = "556294035584"; 
 // número da equipe dona do sistema
