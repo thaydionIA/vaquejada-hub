@@ -13,7 +13,7 @@ export interface Participante {
 export const participantes: Participante[] = [
   {
     eventoSlug: "rancho-pai-filho",  //#01
-    nome: "-",
+    nome: "Dodô",
     cavalo: "-",
     boisDerrubados: 0,
     totalBois: 1,
@@ -133,7 +133,7 @@ export const participantes: Participante[] = [
   },
   {
     eventoSlug: "rancho-pai-filho", //#16
-    nome: "-",
+    nome: "Dodô",
     cavalo: "-",
     boisDerrubados: 0,
     totalBois: 1,
@@ -149,7 +149,7 @@ export const participantes: Participante[] = [
   },
   {
     eventoSlug: "rancho-pai-filho", //#18
-    nome: "-",
+    nome: "Rancho Eder neves",
     cavalo: "-",
     boisDerrubados: 0,
     totalBois: 1,
@@ -181,7 +181,7 @@ export const participantes: Participante[] = [
   },
   {
     eventoSlug: "rancho-pai-filho", //#22
-    nome: "-",
+    nome: "Rancho Eder neves",
     cavalo: "-",
     boisDerrubados: 0,
     totalBois: 1,
@@ -237,7 +237,7 @@ export const participantes: Participante[] = [
   },
   {
     eventoSlug: "rancho-pai-filho", //#29
-    nome: "-",
+    nome: "Rancho Eder neves",
     cavalo: "-",
     boisDerrubados: 0,
     totalBois: 1,
