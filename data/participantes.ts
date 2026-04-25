@@ -12,7 +12,7 @@ export interface Participante {
 
 export const participantes: Participante[] = [
   {
-    eventoSlug: "rancho-pai-filho",  //#01
+    eventoSlug: "rancho-pai-filho", //#01
     nome: "Dodô",
     cavalo: "-",
     boisDerrubados: 0,
@@ -45,7 +45,7 @@ export const participantes: Participante[] = [
   },
   {
     eventoSlug: "rancho-pai-filho", //#05
-    nome: "Ricardo",
+    nome: "Rafael",
     cavalo: "-",
     boisDerrubados: 0,
     totalBois: 1,
@@ -77,7 +77,7 @@ export const participantes: Participante[] = [
   },
   {
     eventoSlug: "rancho-pai-filho", //#09
-    nome: "Ricardo",
+    nome: "Rafael",
     cavalo: "-",
     boisDerrubados: 0,
     totalBois: 1,
@@ -189,7 +189,7 @@ export const participantes: Participante[] = [
   },
   {
     eventoSlug: "rancho-pai-filho", //#23
-    nome: "-",
+    nome: "Gordin do Momento",
     cavalo: "-",
     boisDerrubados: 0,
     totalBois: 1,
@@ -213,7 +213,7 @@ export const participantes: Participante[] = [
   },
   {
     eventoSlug: "rancho-pai-filho", //#26
-    nome: "-",
+    nome: "Gordin do Momento",
     cavalo: "-",
     boisDerrubados: 0,
     totalBois: 1,
@@ -221,7 +221,7 @@ export const participantes: Participante[] = [
   },
   {
     eventoSlug: "rancho-pai-filho", //#27
-    nome: "Ricardo",
+    nome: "Rafael",
     cavalo: "-",
     boisDerrubados: 0,
     totalBois: 1,
@@ -246,6 +246,46 @@ export const participantes: Participante[] = [
   {
     eventoSlug: "rancho-pai-filho", //#30
     nome: "Ailton",
+    cavalo: "-",
+    boisDerrubados: 0,
+    totalBois: 1,
+    status: "-",
+  },
+  {
+    eventoSlug: "rancho-pai-filho", //#31
+    nome: "",
+    cavalo: "-",
+    boisDerrubados: 0,
+    totalBois: 1,
+    status: "-",
+  },
+  {
+    eventoSlug: "rancho-pai-filho", //#32
+    nome: "",
+    cavalo: "-",
+    boisDerrubados: 0,
+    totalBois: 1,
+    status: "-",
+  },
+  {
+    eventoSlug: "rancho-pai-filho", //#33
+    nome: "",
+    cavalo: "-",
+    boisDerrubados: 0,
+    totalBois: 1,
+    status: "-",
+  },
+  {
+    eventoSlug: "rancho-pai-filho", //#34
+    nome: "",
+    cavalo: "-",
+    boisDerrubados: 0,
+    totalBois: 1,
+    status: "-",
+  },
+  {
+    eventoSlug: "rancho-pai-filho", //#35
+    nome: "",
     cavalo: "-",
     boisDerrubados: 0,
     totalBois: 1,

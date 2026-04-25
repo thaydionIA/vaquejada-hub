@@ -13,11 +13,11 @@ export const eventos: Event[] = [
     prizeMoney: 1000,
     hasTrophy: false,
 
-    totalTickets: 30,
+    totalTickets: 35,
     ticketPrice: 150,
     ticketLimitPerRider: 3,
 
-    ticketsSold: 28, // 👈 SE FOR IGUAL totalTickets = ESGOTADO
+    ticketsSold: 30, // 👈 SE FOR IGUAL totalTickets = ESGOTADO
 
     participants: [
       { nome: "João Silva", cavalo: "Relâmpago" },
