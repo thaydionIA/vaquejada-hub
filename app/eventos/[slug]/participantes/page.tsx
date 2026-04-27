@@ -39,7 +39,7 @@ export default async function ParticipantesPage({ params }: Props) {
         </h1>
 
         <div className="mb-14 space-y-2">
-         
+
           <p className="text-xl font-semibold text-amber-100">
             🏟️ {festa.parkName}
           </p>
@@ -49,8 +49,16 @@ export default async function ParticipantesPage({ params }: Props) {
           </p>
 
           <p className="text-amber-300">
-            {festa.location}
+            📍 {festa.location}
           </p>
+          {/* ================= AVISO PREMIAÇÃO ================= */}
+          <div className="mt-8 rounded-xl border border-amber-600 bg-amber-900/70 p-6 shadow-lg">
+            <p className="text-sm md:text-base text-amber-200 leading-relaxed">
+              🚨 <span className="font-bold text-amber-400">ATENÇÃO VAQUEIROS: </span>
+              Caso todas as senhas sejam confirmadas antes da data oficial da festa,
+              a <span className="font-semibold text-yellow-300">premiação poderá aumentar</span>.
+            </p>
+          </div>
         </div>
 
         {/* ================= PREMIAÇÃO ================= */}

@@ -67,11 +67,11 @@ export default async function EventPage({ params }: EventPageProps) {
             </p>
 
             <p className="text-amber-300">
-             📍 {evento.location}
+              📍 {evento.location}
             </p>
 
             <p className="text-1xl font-bold text-amber-500 mt-4">
-               💵 Valor Senha: <strong>{evento.ticketPrice} R$</strong>
+              💵 Valor Senha: <strong>{evento.ticketPrice} R$</strong>
             </p>
           </div>
 
@@ -101,6 +101,14 @@ export default async function EventPage({ params }: EventPageProps) {
                 )}
               </>
             )}
+          </div>
+          {/* ================= AVISO PREMIAÇÃO ================= */}
+          <div className="mt-8 rounded-xl border border-amber-600 bg-amber-900/70 p-6 shadow-lg">
+            <p className="text-sm md:text-base text-amber-200 leading-relaxed">
+              🚨 <span className="font-bold text-amber-400">ATENÇÃO VAQUEIROS: </span>
+              Caso todas as senhas sejam confirmadas antes da data oficial da festa,
+              a <span className="font-semibold text-yellow-300">premiação poderá aumentar</span>.
+            </p>
           </div>
 
           {/* CTA */}
