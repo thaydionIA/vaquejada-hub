@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { ComprarSenhaCTA } from "@/components/ComprarSenhaCTA";
 import Link from "next/link";
+import { SponsorBanner } from "@/components/ui/SponsorBanner";
 
 export const dynamic = "force-static";
 
@@ -159,6 +160,17 @@ export default async function EventPage({ params }: EventPageProps) {
           {evento.description}
         </p>
       </section>
+
+      {evento.sponsors && evento.sponsors.length > 0 && (
+        <section className="mx-auto max-w-4xl px-6 pb-24">
+          <SponsorBanner
+            title="Patrocinadores do evento"
+            subtitle={`Marcas parceiras do ${evento.title}.`}
+            sponsors={evento.sponsors}
+            compact
+          />
+        </section>
+      )}
 
       {/* ================= LOCAL ================= */}
       <section className="mx-auto max-w-4xl px-6 pb-24">

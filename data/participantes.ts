@@ -46,10 +46,11 @@ export const participantes: Participante[] = [
   {
     eventoSlug: "rancho-pai-filho", //#05
     nome: "Rafael Castro",
-    cavalo: "-",
+    cavalo: "Apolo",
     boisDerrubados: 0,
     totalBois: 1,
-    status: "-",
+    status: "V",
+    posicao: 1,
   },
   {
     eventoSlug: "rancho-pai-filho", //#06
@@ -78,10 +79,10 @@ export const participantes: Participante[] = [
   {
     eventoSlug: "rancho-pai-filho", //#09
     nome: "Rafael Castro",
-    cavalo: "-",
+    cavalo: "Apolo",
     boisDerrubados: 0,
     totalBois: 1,
-    status: "-",
+    status: "V",
   },
   {
     eventoSlug: "rancho-pai-filho", //#10
@@ -118,10 +119,10 @@ export const participantes: Participante[] = [
   {
     eventoSlug: "rancho-pai-filho", //#14
     nome: "Rafael Castro",
-    cavalo: "-",
+    cavalo: "Apolo",
     boisDerrubados: 0,
     totalBois: 1,
-    status: "-",
+    status: "V",
   },
   {
     eventoSlug: "rancho-pai-filho", //#15

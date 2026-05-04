@@ -3,6 +3,7 @@ import { participantes } from "@/data/participantes";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { PLATFORM_WHATSAPP } from "@/lib/config";
+import { SponsorModal } from "@/components/ui/SponsorModal";
 
 export const dynamic = "force-static";
 
@@ -32,6 +33,8 @@ export default async function ParticipantesPage({ params }: Props) {
 
   return (
     <main className="min-h-screen bg-amber-950 px-6 py-20 text-amber-50">
+      <SponsorModal sponsor={festa.sponsors?.[0]} eventTitle={festa.title} />
+
       <div className="mx-auto max-w-7xl">
 
         <h1 className="text-4xl font-bold text-amber-400 mb-4">
@@ -68,7 +71,7 @@ export default async function ParticipantesPage({ params }: Props) {
           </h2>
 
           <div className="grid gap-6 md:grid-cols-4">
-            {[1, 2, 3, 4].map((pos) => {
+            {[1,].map((pos) => {
               const campeao = campeoes.find(
                 (c) => c.posicao === pos
               );
@@ -84,9 +87,6 @@ export default async function ParticipantesPage({ params }: Props) {
                 >
                   <div className="text-4xl mb-3">
                     {pos === 1 && "🥇"}
-                    {pos === 2 && "🥈"}
-                    {pos === 3 && "🥉"}
-                    {pos === 4 && "🏅"}
                   </div>
 
                   <h3 className="font-bold text-lg text-amber-100">

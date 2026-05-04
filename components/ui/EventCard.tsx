@@ -9,6 +9,10 @@ interface EventCardProps {
   status: EventStatus;
   slug: string;
   image: string;
+  totalTickets: number;
+  ticketsSold?: number;
+  ticketPrice: number;
+  parkName: string;
 }
 
 export function EventCard({
@@ -18,7 +22,14 @@ export function EventCard({
   status,
   slug,
   image,
+  totalTickets,
+  ticketsSold = 0,
+  ticketPrice,
+  parkName,
 }: EventCardProps) {
+  const restantes = Math.max(totalTickets - ticketsSold, 0);
+  const esgotado = restantes === 0;
+
   const statusConfig: Record<
     EventStatus,
     { label: string; className: string }
@@ -65,6 +76,28 @@ export function EventCard({
 
           <p className="mb-6 text-sm text-[#D6BFA2]">
             {date} • {location}
+          </p>
+
+          <div className="mb-5 grid grid-cols-2 gap-3 text-sm">
+            <div className="rounded-md border border-[#5A3A22] bg-black/20 p-3">
+              <span className="block text-xs uppercase text-[#B89A74]">
+                Senhas
+              </span>
+              <strong className={esgotado ? "text-red-300" : "text-amber-300"}>
+                {esgotado ? "Esgotadas" : `${restantes} restantes`}
+              </strong>
+            </div>
+
+            <div className="rounded-md border border-[#5A3A22] bg-black/20 p-3">
+              <span className="block text-xs uppercase text-[#B89A74]">
+                Valor
+              </span>
+              <strong className="text-amber-300">R$ {ticketPrice}</strong>
+            </div>
+          </div>
+
+          <p className="mb-5 line-clamp-2 text-sm text-[#C8AE8C]">
+            {parkName}
           </p>
 
           <Link

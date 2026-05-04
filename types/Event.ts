@@ -5,7 +5,15 @@ export interface Participant {
   cavalo: string;
 }
 
+export interface Sponsor {
+  name: string;
+  logo: string;
+  description?: string;
+  website?: string;
+}
+
 export interface Event {
+  dateISO: string | number | Date;
   id: string;
   title: string;
   slug: string;
@@ -32,4 +40,5 @@ export interface Event {
 
   status: EventStatus;
   image: string;
+  sponsors?: Sponsor[];
 }

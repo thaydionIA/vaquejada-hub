@@ -8,7 +8,8 @@ export const eventos: Event[] = [
     description:
       "Evento de vaquejada com grandes competidores, premiação garantida e estrutura completa para vaqueiros e público.",
 
-    date: "02 de Maio",
+    date: "02 de Maio de 2026",
+    dateISO: "2026-05-02",
 
     prizeMoney: 1000,
     hasTrophy: false,
@@ -33,8 +34,22 @@ export const eventos: Event[] = [
 
     organizersContacts: ["62 9334-8760", "00000000000"],
 
-    status: "upcoming",
+    status: "finished",
 
     image: "/home5.png",
+
+    sponsors: [
+      {
+        name: "Thaydion Tecnologia",
+        logo: "/thaydion-logo.png",
+        description: "Patrocinador desta vaquejada",
+        website: "https://thaydion.com",
+      },
+      {
+        name: "Rancho Pai e Filho",
+        logo: "/home5.png",
+        description: "Apoio do parque",
+      },
+    ],
   },
 ];

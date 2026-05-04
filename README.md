@@ -34,7 +34,10 @@ app/
       └─ page.tsx        # Página de detalhes do evento (Server Component)
 
 components/
-└─ ComprarSenhaCTA.tsx  # CTA reutilizável (Client Component)
+├─ ComprarSenhaCTA.tsx  # CTA reutilizável (Client Component)
+└─ ui/
+   ├─ SponsorBanner.tsx # Vitrine de patrocinadores
+   └─ SponsorModal.tsx  # Publicidade modal em páginas específicas
 
 data/
 └─ eventos.ts           # Base de dados estática dos eventos
@@ -55,6 +58,8 @@ public/
 |------|------------------|
 | `page.tsx` | Renderização do evento, SEO, layout (Server Component) |
 | `ComprarSenhaCTA` | Interação do usuário, estado, WhatsApp (Client Component) |
+| `SponsorBanner` | Exibição de patrocinadores vinculados aos eventos |
+| `SponsorModal` | Anúncio que aparece sobre a tela e pode ser fechado |
 | `eventos.ts` | Fonte de dados desacoplada da UI |
 
 Essa separação segue **o padrão oficial do Next.js App Router**.
@@ -143,9 +148,52 @@ Os eventos são definidos como objetos TypeScript.
   ticketLimitPerRider: 2,
   hasBar: true,
   description: "Evento tradicional de vaquejada...",
-  organizersContacts: ["62999999999"]
+  organizersContacts: ["62999999999"],
+  sponsors: [
+    {
+      name: "Marca do Patrocinador",
+      logo: "/patrocinadores/marca.png",
+      description: "Patrocinador desta vaquejada",
+      website: "https://site-do-patrocinador.com"
+    }
+  ]
 }
 ```
+
+---
+
+## 📣 Patrocinadores e Publicidade
+
+Os patrocinadores **não são fixos da plataforma**. Eles podem mudar de uma vaquejada para outra e devem ser cadastrados dentro do objeto de cada evento em `data/eventos.ts`.
+
+Cada evento pode ter sua própria lista:
+
+```ts
+sponsors: [
+  {
+    name: "Nome da Marca",
+    logo: "/patrocinadores/nome-da-marca.png",
+    description: "Patrocinador desta vaquejada",
+    website: "https://site-da-marca.com"
+  }
+]
+```
+
+Campos:
+
+- `name`: nome da marca exibida.
+- `logo`: caminho da imagem dentro da pasta `public`.
+- `description`: texto curto, como "Patrocinador desta vaquejada" ou "Apoio do parque".
+- `website`: link opcional da marca. Se não existir, o card aparece sem clique externo.
+
+Onde aparecem:
+
+- Página inicial: reúne as marcas cadastradas nos eventos.
+- Página específica do evento: mostra apenas os patrocinadores daquele evento.
+- Página de participantes: pode abrir um anúncio modal com o primeiro patrocinador do evento.
+- Página de eventos encerrados: mostra patrocinadores ligados aos eventos finalizados.
+
+Para trocar os patrocinadores de uma vaquejada, altere somente o campo `sponsors` daquele evento. Isso mantém abertura para cada festa ter seus próprios apoiadores, sem misturar marcas entre eventos diferentes.
 
 ---
 
@@ -259,4 +307,3 @@ Este projeto não é apenas um site, mas uma **base sólida de produto**, pensad
 
 📌 **Autor:** Projeto Hub de Eventos de Vaquejada
 📌 **Status:** Pronto para produção
-
